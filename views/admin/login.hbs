@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row justify-content-center my-5">
+        <div class="col-5">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/admin/login" method='post'>
+                        <div class="form-group my-3">
+                            <input type="text" class="form-control" placeholder="Usuario" name="usuario">
+                        </div>
+                        <div class="form-group my-3">
+                            <input type="password" class="form-control" placeholder="Contraseña" name="password">
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="text-center">
+                                    <button type="submit" class='btn btn-primary btn-block'><i
+                                            class="fas fa-sign-in-alt"></i>
+                                        Ingresar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="text-center">
+                {{#if error}}
+                <p>Usuario o clave incorrecto.</p>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
