@@ -33,4 +33,26 @@ async function deleteFotoById(id){
     }
 }
 
-module.exports = { getFotos, insertFoto, deleteFotoById };
+async function getFotoById(id){
+    try {
+        var query = 'SELECT * FROM fotosgaleria WHERE id = ?';
+        var rows = await pool.query(query, [id]);
+        return rows[0];
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+async function updateFotoById(obj, id){
+    try {
+        var query = 'UPDATE fotosgaleria SET ? WHERE id = ?';
+        var rows = await pool.query(query, [obj, id]);
+        return rows;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+module.exports = { getFotos, insertFoto, deleteFotoById, getFotoById, updateFotoById };

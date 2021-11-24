@@ -52,4 +52,47 @@ router.get('/eliminar/:id', async (req, res, next) => {
   res.redirect('/admin/galeria');
 });
 
+router.get('/modificar/:id', async (req, res, next) => {
+  var id = req.params.id;
+
+  var foto = await galeriaModel.getFotoById(id);
+  
+  console.log(foto);
+
+  res.render('admin/modificar', {
+    layout: 'admin/layout',
+    foto
+  });
+});
+
+router.post('/modificar', async (req, res, next) => {
+  try {
+    var id = req.body.id;
+
+    if (req.body.titulo != '' && req.body.descripcion != '') {
+      var obj = {
+        titulo: req.body.titulo,
+        descripcion: req.body.descripcion
+      };
+      await galeriaModel.updateFotoById( obj, id );
+      res.redirect('/admin/galeria');
+    } else {
+      res.render('admin/modificar', {
+        layout: 'admin/layout',
+        error: true,
+        message: 'Todos los campos son requeridos.',
+        id
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.render('admin/modificar', {
+      layout: 'admin/layout',
+      error: true,
+      message: 'No se pudo modificar la foto. ' + error,
+      id
+    });
+  }
+});
+
 module.exports = router;
