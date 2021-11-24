@@ -99,3 +99,12 @@ p, li, a {
   border: 3px solid #664144;
   border-radius: 1.5rem;
 }
+
+.card-galeria{
+  background-color: #FFFFFF;
+  border-radius: 1.5rem;
+}
+
+.card-img-top{
+  border-radius: 1.5rem 1.5rem 0 0;
+}

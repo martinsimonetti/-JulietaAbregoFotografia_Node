@@ -2,11 +2,145 @@
     <div class="row mt-3">
         <div class="col-11">
             <h1>Proximamente... Galería</h1>
-            
         </div>
         <div class="col-1">
             <a class="btn btn-primary" href="/admin/login/logout">Salir <i class="fas fa-sign-out-alt"></i></a>
         </div>
     </div>
 </div>
-
+<div class="container">
+    <div class="row text-center">
+        <div class="col">
+            <a href="/admin/galeria/agregar" class="btn btn-success"><i class="fa fa-plus"></i> Agregar foto</a>
+        </div>
+    </div>
+    <div class="row md-5 mt-2">
+        {{!-- Repetir este código por cada foto --}}
+        {{#each galeria}}
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card-galeria">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalImage{{id}}">
+                    <img class="w-100 mb-4 card-img-top" src="https://via.placeholder.com/800x600.png" alt="Imagen no disponible">
+                </a>
+                <div class="text-center px-3 pb-1">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h4>{{titulo}}</h4>
+                        </div>
+                        <div class="col-auto mb-2">
+                            <a href="/admin/galeria/modificar/{{id}}" class="btn btn-sm btn-warning text-white"><i
+                                    class="fa fa-pencil"></i></a>
+                            <a href="/admin/galeria/eliminar/{{id}}" class="btn btn-sm btn-danger"><i
+                                    class="fa fa-trash"></i></a>
+                        </div>
+                    </div>
+                    <p style="text-align: justify">{{descripcion}}</p>
+                </div>
+                <div tabindex="-1" aria-labelledby="modalImage{{id}}" aria-hidden="true" class="modal fade" id="modalImage{{id}}">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="model-content">
+                            <img class="w-100 mb-4 rounded" src="https://via.placeholder.com/800x600.png" alt="Imagen no disponible">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        {{!-- Hasta acá --}}
+        {{!-- <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card-galeria">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalImage2">
+                    <img class="w-100 mb-4 card-img-top" src="https://via.placeholder.com/800x600.png">
+                </a>
+                <div class="text-center px-3 pb-1">
+                    <h4>Cumple 15</h4>
+                    <p style="text-align: justify">Esto es un texto de prueba. Quiero ver como se ve en la página.
+                        sdfsdfsd fdsfdsfads zdgsfhtr agaf adag agaer aea awa ewawe raewr aewr aewrawerw raFEF.</p>
+                </div>
+                <div tabindex="-1" aria-labelledby="modalImage2" aria-hidden="true" class="modal fade" id="modalImage2">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="model-content">
+                            <img class="w-100 mb-4 rounded" src="https://via.placeholder.com/800x600.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card-galeria">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalImage3">
+                    <img class="w-100 mb-4 card-img-top" src="https://via.placeholder.com/800x600.png">
+                </a>
+                <div class="text-center px-3 pb-1">
+                    <h4>Cumple 15</h4>
+                    <p style="text-align: justify">Esto es un texto de prueba. Quiero ver como se ve en la página.
+                        sdfsdfsd fdsfdsfads zdgsfhtr agaf adag agaer aea awa ewawe raewr aewr aewrawerw raFEF.</p>
+                </div>
+                <div tabindex="-1" aria-labelledby="modalImage3" aria-hidden="true" class="modal fade" id="modalImage3">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="model-content">
+                            <img class="w-100 mb-4 rounded" src="https://via.placeholder.com/800x600.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card-galeria">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalImage4">
+                    <img class="w-100 mb-4 card-img-top" src="https://via.placeholder.com/800x600.png">
+                </a>
+                <div class="text-center px-3 pb-1">
+                    <h4>Cumple 15</h4>
+                    <p style="text-align: justify">Esto es un texto de prueba. Quiero ver como se ve en la página.
+                        sdfsdfsd fdsfdsfads zdgsfhtr agaf adag agaer aea awa ewawe raewr aewr aewrawerw raFEF.</p>
+                </div>
+                <div tabindex="-1" aria-labelledby="modalImage4" aria-hidden="true" class="modal fade" id="modalImage4">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="model-content">
+                            <img class="w-100 mb-4 rounded" src="https://via.placeholder.com/800x600.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card-galeria">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalImage5">
+                    <img class="w-100 mb-4 card-img-top" src="https://via.placeholder.com/800x600.png">
+                </a>
+                <div class="text-center px-3 pb-1">
+                    <h4>Cumple 15</h4>
+                    <p style="text-align: justify">Esto es un texto de prueba. Quiero ver como se ve en la página.
+                        sdfsdfsd fdsfdsfads zdgsfhtr agaf adag agaer aea awa ewawe raewr aewr aewrawerw raFEF.</p>
+                </div>
+                <div tabindex="-1" aria-labelledby="modalImage5" aria-hidden="true" class="modal fade" id="modalImage5">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="model-content">
+                            <img class="w-100 mb-4 rounded" src="https://via.placeholder.com/800x600.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card-galeria">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalImage6">
+                    <img class="w-100 mb-4 card-img-top" src="https://via.placeholder.com/800x600.png">
+                </a>
+                <div class="text-center px-3 pb-1">
+                    <h4>Cumple 15</h4>
+                    <p style="text-align: justify">Esto es un texto de prueba. Quiero ver como se ve en la página.
+                        sdfsdfsd fdsfdsfads zdgsfhtr agaf adag agaer aea awa ewawe raewr aewr aewrawerw raFEF.</p>
+                </div>
+                <div tabindex="-1" aria-labelledby="modalImage6" aria-hidden="true" class="modal fade" id="modalImage6">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="model-content">
+                            <img class="w-100 mb-4 rounded" src="https://via.placeholder.com/800x600.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+    </div>
+</div>
