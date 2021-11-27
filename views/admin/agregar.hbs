@@ -4,17 +4,22 @@
         <div class="col-5">
             <div class="card">
                 <div class="card-body">
-                    <form action="/admin/galeria/agregar" method='post'>
+                    <form action="/admin/galeria/agregar" method='post' enctype="multipart/form-data">
+                        <div class="form-group mb-3">
+                            <label>Foto: <input type="file" name="imagen" id="imagen" required /></label>
+                        </div>
                         <div class="form-group my-3">
                             <input type="text" class="form-control" placeholder="Título" name="titulo" required>
                         </div>
                         <div class="form-group my-3">
-                            <textarea type="text" class="form-control" rows="5" placeholder="Descripción" name="descripcion" required></textarea>
+                            <textarea type="text" class="form-control" rows="5" placeholder="Descripción"
+                                name="descripcion" required></textarea>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="text-center">
-                                    <button type="submit" class='btn btn-success btn-block'><i class="far fa-save"></i> Guardar</button>
+                                    <button type="submit" class='btn btn-success btn-block'><i class="far fa-save"></i>
+                                        Guardar</button>
                                 </div>
                             </div>
                         </div>
@@ -24,7 +29,7 @@
         </div>
         <div class="text-center mt-3">
             {{#if error}}
-                <p>{{message}}</p>
+            <p>{{message}}</p>
             {{/if}}
         </div>
     </div>
