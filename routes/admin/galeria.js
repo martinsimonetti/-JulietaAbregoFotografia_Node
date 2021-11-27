@@ -11,6 +11,7 @@ cloudinary.config({
 });
 
 const uploader = util.promisify(cloudinary.uploader.upload);
+const destroy = util.promisify(cloudinary.uploader.destroy);
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
@@ -62,30 +63,35 @@ router.post('/agregar', async (req, res, next) => {
       });
     }
     if (req.body.titulo != '' && req.body.descripcion != '') {
-        await galeriaModel.insertFoto({
-          ...req.body,
-          url_foto
-        });
-        res.redirect('/admin/galeria');
-      } else {
-        res.render('admin/agregar', {
-          layout: 'admin/layout',
-          error: true,
-          message: 'Todos los campos son requeridos.'
-        });
-      }
-    } catch (error) {
-      console.log(error);
+      await galeriaModel.insertFoto({
+        ...req.body,
+        url_foto
+      });
+      res.redirect('/admin/galeria');
+    } else {
       res.render('admin/agregar', {
         layout: 'admin/layout',
         error: true,
-        message: 'No se pudo agregar la foto a la galería. ' + error
+        message: 'Todos los campos son requeridos.'
       });
     }
-  });
+  } catch (error) {
+    console.log(error);
+    res.render('admin/agregar', {
+      layout: 'admin/layout',
+      error: true,
+      message: 'No se pudo agregar la foto a la galería. ' + error
+    });
+  }
+});
 
 router.get('/eliminar/:id', async (req, res, next) => {
   var id = req.params.id;
+  let foto = await galeriaModel.getFotoById(id);
+
+  if (foto.url_foto) {
+    await (destroy(foto.url_foto));
+  }
 
   await galeriaModel.deleteFotoById(id);
 
@@ -97,7 +103,7 @@ router.get('/modificar/:id', async (req, res, next) => {
 
   var foto = await galeriaModel.getFotoById(id);
 
-  console.log(foto);
+  //console.log(foto);
 
   res.render('admin/modificar', {
     layout: 'admin/layout',
@@ -109,10 +115,32 @@ router.post('/modificar', async (req, res, next) => {
   try {
     var id = req.body.id;
 
+    let url_foto = req.body.img_original;
+    let = borrar_img_vieja = false;
+
+    if (req.files && Object.keys(req.files).length > 0) {
+      imagen = req.files.imagen;
+      url_foto = (await uploader(imagen.tempFilePath)).public_id;
+      borrar_img_vieja = true;
+    } else {
+      if (!req.body.img_original) {
+        res.render('admin/modificar', {
+          layout: 'admin/layout',
+          error: true,
+          message: 'Debe incluir una imagen para continuar.'
+        });
+      }
+    }
+
+    if (borrar_img_vieja && req.body.img_original) {
+      await (destroy(req.body.img_original));
+    }
+
     if (req.body.titulo != '' && req.body.descripcion != '') {
       var obj = {
         titulo: req.body.titulo,
-        descripcion: req.body.descripcion
+        descripcion: req.body.descripcion,
+        url_foto
       };
       await galeriaModel.updateFotoById(obj, id);
       res.redirect('/admin/galeria');
@@ -129,7 +157,7 @@ router.post('/modificar', async (req, res, next) => {
     res.render('admin/modificar', {
       layout: 'admin/layout',
       error: true,
-      message: 'No se pudo modificar la foto. ' + error,
+      message: 'No se pudo editar la foto. ' + error,
       id
     });
   }
