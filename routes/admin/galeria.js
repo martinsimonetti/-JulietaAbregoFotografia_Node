@@ -19,11 +19,10 @@ router.get('/', async function (req, res, next) {
 
   galeria = galeria.map(foto => {
     if (foto.url_foto) {
-      const imagen = cloudinary.image(foto.url_foto, {
+      const imagen = cloudinary.url(foto.url_foto, {
         width: 1440,
         height: 1080,
         crop: 'fill',
-        class: 'w-100 h-100 mb-4 card-img-top'
       });
 
       return {

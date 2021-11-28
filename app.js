@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var fileUpload = require('express-fileupload');
+var cors = require('cors');
 
 require('dotenv').config();
 require('cloudinary').config();
@@ -13,6 +14,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/admin/login');
 var adminRouter = require('./routes/admin/galeria');
+var apiRouter = require('./routes/api');
 
 var app = express();
 
@@ -53,6 +55,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin/login', loginRouter);
 app.use('/admin/galeria', secured, adminRouter);
+app.use('/api', cors(), apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
