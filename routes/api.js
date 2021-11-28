@@ -75,7 +75,7 @@ router.post('/', async (req, res, next) => {
         });
         res.status(201).json({
             error: false,
-            message: 'Mensaje enviado'
+            message: '¡Gracias por suscribirte!'
         });
     } catch (error) {
         console.log(error);
