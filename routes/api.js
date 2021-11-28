@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var galeriaModel = require('./../models/galeriaModel');
+var suscriptosModel = require('./../models/suscriptosModel');
 var cloudinary = require('cloudinary').v2;
 var nodemailer = require('nodemailer');
 
@@ -65,6 +66,24 @@ router.post('/contacto', async (req, res) => {
         error: false,
         message: 'Mensaje enviado'
     })
+});
+
+router.post('/', async (req, res, next) => {
+    try {
+        await suscriptosModel.insertSuscripto({
+            ...req.body
+        });
+        res.status(201).json({
+            error: false,
+            message: 'Mensaje enviado'
+        });
+    } catch (error) {
+        console.log(error);
+        res.render('/', {
+            error: true,
+            message: 'No se suscribir, intente nuevamente. ' + error
+        });
+    }
 });
 
 module.exports = router;
